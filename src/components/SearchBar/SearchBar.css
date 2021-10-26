@@ -1,0 +1,31 @@
+.search-bar {
+    width: 55%;
+    margin: 40px auto;
+    line-height: 56px;
+    position: relative
+  }
+
+.input[type="text"] {
+    width: 89%;
+    height: 33px;
+    padding: 0 10px;
+    color: #000;
+    border: 1px solid #BEBEBE;
+    border-radius: 2px 0 0 2px;
+    z-index: 2
+  }
+.button {
+    position: absolute;
+    width: 11%;
+    height: 33px;
+    border: 1px solid #BEBEBE;
+    border-left: 0;
+    top: 13px;
+    right: 0;
+    border-radius: 0px 2px 2px 0;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    background-color: #f0f0f0;
+    z-index: 1
+  }
