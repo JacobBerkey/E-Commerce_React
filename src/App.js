@@ -18,10 +18,10 @@ class App extends Component {
   }
 
   // axios POST create user and GET token
- createNewUser = async(newUser)=>{
-  console.log("createNewUserFunction:", newUser)
+ createNewUser = async(User)=>{
+  console.log("createNewUserFunction:",User)
   try{
-    const response = await axios.post("https://localhost:44394/api/authentication/", newUser)
+    const response = await axios.post(`https://localhost:44394/api/authentication`, User)
   }
   catch(err){
       console.log("Unable to create new user", err);

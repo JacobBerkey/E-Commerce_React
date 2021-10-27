@@ -53,10 +53,10 @@ export default function SignUp(props) {
     const newUser = {
         firstname : firstName,
         lastname : lastName,
-        username : 'Test',
+        username : email,
         email : email,
         password : password,
-        phonenumber : 222-222-2222
+        phonenumber : "222-222-2222"
     } 
     console.log("handleSubmit:", newUser)
     console.log("handleSubmit:", props)
@@ -184,5 +184,3 @@ const theme = createTheme();
 }
 
 
-// email: data.get('email'),
-// password: data.get('password'),
