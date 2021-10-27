@@ -19,14 +19,14 @@ class App extends Component {
 
   }
 
-  componentDidMount(){
-    const jwt = localStorage.getItem('token');
-    try {
-      const user = jwtDecode(jwt);
-      this.setState({user});
-    }
-    catch {}
-  }
+  // componentDidMount(){
+  //   const jwt = localStorage.getItem('token');
+  //   try {
+  //     const user = jwtDecode(jwt);
+  //     this.setState({user});
+  //   }
+  //   catch {}
+  // }
 
   render () {
     const user = this.state.user;
