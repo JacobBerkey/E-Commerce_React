@@ -1,24 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
-
+import { Button } from '@material-ui/core';
 function NavBar() {
-
     return(
         <nav>
             <ul>
                 <Link to = '/'>
-                    <button>Home</button>
+                    <Button>Home</Button>
                 </Link>
                 <Link to='/Login'>
-                    <button>Login</button>
+                    <Button>Login</Button>
                 </Link>
                 <Link to='/Register'>
-                    <button>Register</button>
+                    <Button>Register</Button>
+                </Link>
+                <Link to='/shoppingcart'>
+                    <Button>Shopping Cart</Button>
+                </Link>
+                <Link to='/create'>
+                    <Button>Create Listing</Button>
                 </Link>
             </ul>
         </nav>
     );
 }
-
 export default NavBar;
