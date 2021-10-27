@@ -1,0 +1,13 @@
+
+
+App.jsx
+
+Registry Page/Modal
+
+navBar- Search By Name
+View Products
+    list of product
+        Add Product Modal Using Hooks
+
+    -single product
+        Review Product Modal Using Hooks
