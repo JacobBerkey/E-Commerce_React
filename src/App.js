@@ -16,16 +16,21 @@ class App extends Component {
     super(props);
       this.state = {
         user: [],
+        allProducts : []
       }
   }
 
  
 componentDidMount () {
   const jwt = localStorage.getItem('token');
+  this.getAllProducts();
   try{
     const user = jwtDecode(jwt);
     this.setState({user});
-  } catch {}
+    console.log("componentDidMount :", user)
+  } catch {
+    console.log("user state no accessible")
+  }
 }
 
 
@@ -51,6 +56,17 @@ componentDidMount () {
    }
  }
  
+ getAllProducts = async () =>{
+   const jwt = localStorage.getItem('token')
+   let response = await axios.get('https://localhost:44394/api/product', {headers: {Authorization: 'Bearer ' + jwt}})
+   console.log("getAllProducts :", response.data, "token: ", response.data.token)
+   this.setState({
+     allProducts : response.data
+   })
+ }
+
+
+
  logOutUser = async () =>{
   localStorage.removeItem('token');
  }
