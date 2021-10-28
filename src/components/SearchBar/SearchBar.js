@@ -23,20 +23,16 @@ class SearchBar extends Component {
 
     render() {
         return (
-
-            // <Paper elevation={6} style={{padding:'25px', color: "black"}}>
-            // <form onSubmit={this.handleSubmit} style={{backgroundColor: "white"}}>
-            //     <TextField fullWidth label="Search for..." onChange={this.handleChange}></TextField>
-            // </form>
-            // </Paper>
-
-            <form onSubmit={(event) => this.handleSubmit(event)}>
+            <containter>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
                 <div className="search-bar"> 
                 <input className="input" type="text" name="searchQuery" placeholder="Search..."
                 onChange={this.handleChange} value={this.searchQuery}/>
                 <button className="button" type="submit">Search</button>
                 </div>
             </form>
+            </containter>
+            
         )
     }
 }

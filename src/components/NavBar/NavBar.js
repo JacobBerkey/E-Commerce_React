@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button} from '@material-ui/core';
 
 
-function NavBar() {
+function NavBar(props) {
     return(
         <nav>
             <ul>
@@ -12,6 +12,10 @@ function NavBar() {
                 </Link>
                 <Link to='/Login'>
                     <Button>Login</Button>
+                </Link>
+                <Link to='/Login'>
+                    {console.log("navbar: ", props)}
+                    <Button onClick={props.logOutUser}>LogOut</Button>
                 </Link>
                 <Link to='/Register'>
                     <Button>Register</Button>
