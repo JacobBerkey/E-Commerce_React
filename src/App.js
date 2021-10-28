@@ -1,4 +1,4 @@
-import SignInSide from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
 import SearchBar from "./components/SearchBar/SearchBar";
 import NavBar from "./components/NavBar/NavBar";
@@ -6,7 +6,7 @@ import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Home from "./components/Home/Home";
 import React, { Component } from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 
 class App extends Component {
@@ -17,8 +17,8 @@ class App extends Component {
       }
   }
 
-  // axios POST create user and GET token
- createNewUser = async(User)=>{
+ 
+  createNewUser = async(User)=>{
   console.log("createNewUserFunction:",User)
   try{
     const response = await axios.post(`https://localhost:44394/api/authentication`, User)
@@ -28,18 +28,32 @@ class App extends Component {
   }
  }
 
+  userSignIn = async (userCredentials) =>{
+   console.log("userSignIn :", userCredentials)
+   try{
+     const response = await axios.post('https://localhost:44394/api/authentication/login', userCredentials)
+     localStorage.setItem('token', response.data.token)
+     console.log("token: ", response.data.token)
+   }
+   catch (err){
+      console.log("Username and/or Password invalid. Please try again", err)
+   }
+ }
 
 
   render () {
     const user = this.state.user;
     return (
-      <div><NavBar /> 
+      <div>
+        <NavBar /> 
         <SearchBar />
       <div className='App'>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Login" component={SignInSide} />
-          {/* <Route path="/Register" component={SignUp} /> */}
+          <Route path="/" render={props => {
+              if (!user){
+              return <Redirect to="/Login" />;}
+              else{return < Home {...props}/>}}}/>
+          <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" component={ShoppingCart} />
           <Route path="/create" component={CreateListing} />

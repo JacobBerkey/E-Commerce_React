@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {useState} from 'react';
+// import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,40 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+export default function Login(props) {
+
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+
+
+
+
+ const handleUserNameChange = (event) =>{
+     setUsername(event.target.value);
+     console.log("handleUserName: ", username )
+ }
+
+ const handlePasswordChange =(event) =>{
+     setPassword(event.target.value);
+     console.log("handlePasswordChange :", password)
+ }
+
+
+
+ const handleSubmit = (event) => {
+    event.preventDefault();
+    const userCredentials = {
+        username : username,
+        password : password
+    }
+    console.log("handleSubmit :", userCredentials, props)
+    props.userSignIn(userCredentials);
+};
+
+
+
 
 function Copyright(props) {
     return (
@@ -28,16 +63,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInSide() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -78,10 +104,11 @@ export default function SignInSide() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="username"
+                            label="username"
+                            name="username"
+                            autoComplete="username"
+                            onChange={handleUserNameChange}
                             autoFocus
                         />
                         <TextField
@@ -93,6 +120,7 @@ export default function SignInSide() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={handlePasswordChange}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -113,6 +141,7 @@ export default function SignInSide() {
                                     </Link>
                                 </Grid>
                             <Grid item>
+                                {/* Place a link to sign up below */}
                                 <Link href="#" variant="body2">
                                 {"Don't have an account? Sign Up"}
                                 </Link>
