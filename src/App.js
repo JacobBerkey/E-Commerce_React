@@ -5,11 +5,11 @@ import NavBar from "./components/NavBar/NavBar";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Home from "./components/Home/Home";
-import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React, { Component } from 'react'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {Redirect} from "react-router";
+
 
 class App extends Component {
   constructor(props){
@@ -19,21 +19,8 @@ class App extends Component {
       }
   }
 
-  componentDidMount(){
-    const jwt = localStorage.getItem('token');
-    try{
-      const user = jwt_decode(jwt);
-      this.setState({
-        user
-      });
-      console.log("CompDidMount", user)
-    } catch(err) {
-      console.log("CompDidMount token not found")
-    }
-  }
-
-  // axios POST create user and GET token
- createNewUser = async(User)=>{
+ 
+  createNewUser = async(User)=>{
   console.log("createNewUserFunction:",User)
   try{
     const response = await axios.post(`https://localhost:44394/api/authentication`, User)
@@ -43,25 +30,40 @@ class App extends Component {
   }
  }
 
+  userSignIn = async (userCredentials) =>{
+   console.log("userSignIn :", userCredentials)
+   try{
+     const response = await axios.post('https://localhost:44394/api/authentication/login', userCredentials)
+     localStorage.setItem('token', response.data.token)
+     console.log("token: ", response.data.token)
+   }
+   catch (err){
+      console.log("Username and/or Password invalid. Please try again", err)
+   }
+ }
 
 
- render () {
-  const user = this.state.user;
-  return (
-    <div><NavBar /> 
-      <SearchBar />
-    <div className='App'>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
-        <Route path="/shoppingcart" component={ShoppingCart} />
-        <Route path="/create" component={CreateListing} />
-      </Switch>
-    </div>
-    </div>
-  )
-}
+  render () {
+    const user = this.state.user;
+    return (
+      <div>
+        <NavBar /> 
+        <SearchBar />
+      <div className='App'>
+        <Switch>
+          <Route path="/" render={props => {
+              if (!user){
+              return <Redirect to="/Login" />;}
+              else{return < Home {...props}/>}}}/>
+          <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn}/>} />
+          <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
+          <Route path="/shoppingcart" component={ShoppingCart} />
+          <Route path="/create" component={CreateListing} />
+        </Switch>
+      </div>
+      </div>
+    )
+  }
 }
 
 export default App
