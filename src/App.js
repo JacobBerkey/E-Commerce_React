@@ -54,20 +54,25 @@ componentDidMount () {
   localStorage.removeItem('token');
  }
 
+  sendUserToSignUp = async() =>{
+    window.location = '/Register';
+ }
+
   render () {
     const user = this.state.user;
     return (
       <div>
-        <NavBar logOutUser={this.logOutUser} /> 
+        <NavBar  user={user}  logOutUser={this.logOutUser} /> 
         <SearchBar />
 
       <div className='App'>
         <Switch>
-          <Route path="/Home" render={props => { 
+          <Route path="/home" render={props => { 
+            {console.log("renderUser :", user)}
           if(!user){
             return <Redirect to="/Login" />;}
-            else{ return <Home {...props} />}}} />;
-          <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn}/>} />
+            else{ return <Home {...props} user = {user}/>}}} />;
+          <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" component={ShoppingCart} />
           <Route path="/create" component={CreateListing} />
