@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { WindowSharp } from '@mui/icons-material';
 
 
 export default function Login(props) {
@@ -43,6 +44,7 @@ export default function Login(props) {
     }
     console.log("handleSubmit :", userCredentials, props)
     props.userSignIn(userCredentials);
+    window.location = '/home';
 };
 
 
@@ -142,7 +144,7 @@ const theme = createTheme();
                                 </Grid>
                             <Grid item>
                                 {/* Place a link to sign up below */}
-                                <Link to="/Register" variant="body2">
+                                <Link href="/Register"   variant="body2">
                                 {"Don't have an account? Sign Up"}
                                 </Link>
                                 </Grid>
