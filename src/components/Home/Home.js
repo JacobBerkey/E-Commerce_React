@@ -8,7 +8,7 @@ function Home(props) {
     return (
         <div>
             <h1>Our eCommerce Site</h1>
-            <Products allProducts = {props.allProducts}/>
+            <Products allProducts = {props.allProducts} addItemToCart={props.addItemToCart} />
         </div>
 
     )

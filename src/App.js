@@ -15,21 +15,22 @@ class App extends Component {
   constructor(props){
     super(props);
       this.state = {
-        user: [],
-        allProducts : []
+        user: "",
+        allProducts : [],
+        shoppingCart : [],
       }
   }
 
  
 componentDidMount () {
   const jwt = localStorage.getItem('token');
-  this.getAllProducts();
+  const user = jwtDecode(jwt);
+  this.setState({user});
+  console.log("componentDidMount User :", user)
   try{
-    const user = jwtDecode(jwt);
-    this.setState({user});
-    console.log("componentDidMount :", user)
-  } catch {
-    console.log("user state no accessible")
+    this.getAllProducts();
+  } catch (err) {
+    console.log("Get All products", err)
   }
 }
 
@@ -50,6 +51,7 @@ componentDidMount () {
      const response = await axios.post('https://localhost:44394/api/authentication/login', userCredentials)
      localStorage.setItem('token', response.data.token)
      console.log("token: ", response.data.token)
+      window.location = '/home';
    }
    catch (err){
       console.log("Username and/or Password invalid. Please try again", err)
@@ -65,7 +67,19 @@ componentDidMount () {
    })
  }
 
+ getItemsInShoppingCart = async()=>{
+  const jwt = localStorage.getItem('token');
+  let response = await axios.post(`https://localhost:44394/api/shoppingcart`, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.setState({
+    shoppingCart : response.data
+  })
+ }
 
+ addItemToCart = async (productId) => {
+  const jwt = localStorage.getItem('token');
+  let response = await axios.post(`https://localhost:44394/api/shoppingcart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.getItemsInShoppingCart();
+ }
 
  logOutUser = async () =>{
   localStorage.removeItem('token');
@@ -76,7 +90,7 @@ componentDidMount () {
  }
 
   render () {
-    const user = this.state.user;
+    var user = this.state.user;
     return (
       <div>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
@@ -86,12 +100,18 @@ componentDidMount () {
         <Switch>
           <Route path="/home" render={props => { 
             {console.log("renderUser :", user)}
-          if(!user){
-            return <Redirect to="/Login" />;}
-            else{ return <Home {...props} user = {user} allProducts = {this.state.allProducts}/>}}} />;
+
+          {console.log("App - user: ", this.state.user)}
+          if(this.state.user){
+            return <Home {...props} user = {user} allProducts = {this.state.allProducts} addItemToCart={this.addItemToCart} />
+          }
+          else{ 
+              return <Redirect to="/Login" />;
+            }}
+            } />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
-          <Route path="/shoppingcart" component={ShoppingCart} />
+          {/* <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} /> */}
           <Route path="/create" component={CreateListing} />
         </Switch>
       </div>
