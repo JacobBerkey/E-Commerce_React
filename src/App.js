@@ -88,7 +88,7 @@ componentDidMount () {
             {console.log("renderUser :", user)}
           if(!user){
             return <Redirect to="/Login" />;}
-            else{ return <Home {...props} user = {user}/>}}} />;
+            else{ return <Home {...props} user = {user} allProducts = {this.state.allProducts}/>}}} />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" component={ShoppingCart} />

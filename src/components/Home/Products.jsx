@@ -6,7 +6,15 @@ const Products = (props) =>{
 
 
     return (
-        <h1>Products Will Go Here</h1>
+        <div>
+            <h1>Products Will Go Here</h1>
+            <ul>
+                {props.allProducts.map(product => 
+                <li>{product.name}</li>
+                )}
+                
+            </ul>
+        </div>
     );
 
 }
