@@ -24,11 +24,12 @@ class App extends Component {
  
 componentDidMount () {
   const jwt = localStorage.getItem('token');
+  try{
   const user = jwtDecode(jwt);
   this.setState({user});
   console.log("componentDidMount User :", user)
-  try{
-    this.getAllProducts();
+  this.getAllProducts();
+
   } catch (err) {
     console.log("Get All products", err)
   }
@@ -95,23 +96,22 @@ componentDidMount () {
       <div>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
         <SearchBar />
-
       <div className='App'>
         <Switch>
-          <Route path="/home" render={props => { 
+          <Route path="/Home" render={props => { 
             {console.log("renderUser :", user)}
 
           {console.log("App - user: ", this.state.user)}
-          if(this.state.user){
-            return <Home {...props} user = {user} allProducts = {this.state.allProducts} addItemToCart={this.addItemToCart} />
+          if(!user){
+            return <Redirect to="/Login" />;
           }
           else{ 
-              return <Redirect to="/Login" />;
-            }}
+            return <Home {...props} user={user} allProducts = {this.state.allProducts} addItemToCart={this.addItemToCart} />
+          }}
             } />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
-          {/* <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} /> */}
+          <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
         </Switch>
       </div>
