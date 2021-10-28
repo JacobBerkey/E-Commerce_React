@@ -7,7 +7,7 @@ function NavBar(props) {
     return(
         <nav>
             <ul>
-                <Link to = '/'>
+                <Link to = '/Home'>
                     <Button>Home</Button>
                 </Link>
                 <Link to='/Login'>

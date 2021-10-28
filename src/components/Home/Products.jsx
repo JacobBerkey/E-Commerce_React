@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Griad, Paper, Box} from '@material-ui/core'
+import {Button} from '@material-ui/core'
 
 
 const Products = (props) =>{
 
+    
 
     return (
         <div>
@@ -17,6 +18,5 @@ const Products = (props) =>{
             </ul>
         </div>
     );
-
 }
 export default Products;

@@ -44,7 +44,7 @@ export default function Login(props) {
     }
     console.log("handleSubmit :", userCredentials, props)
     props.userSignIn(userCredentials);
-    window.location = '/home';
+    
 };
 
 

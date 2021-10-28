@@ -11,3 +11,18 @@ View Products
 
     -single product
         Review Product Modal Using Hooks
+
+
+
+
+console.log("products:",props)
+    const product = props.allProducts[0];
+
+    const handleSubmit = async (event) =>{
+        event.preventDefault();
+        console.log("handleAddToCart :", product.productId, "Product :", product);
+        props.addItemToCart(product.productId)
+    }
+
+
+    <Button onClick={handleSubmit}>Add To Cart</Button></li>
