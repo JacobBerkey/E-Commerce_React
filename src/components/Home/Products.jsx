@@ -10,9 +10,10 @@ const Products = (props) =>{
             <h1>Products Will Go Here</h1>
             <ul>
                 {props.allProducts.map(product => 
+                <div onClick={ () => {props.goToSingleProd(product);}}>
                 <li>{product.name}</li>
+                </div>
                 )}
-                
             </ul>
         </div>
     );

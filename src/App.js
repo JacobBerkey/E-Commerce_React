@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar/NavBar";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Home from "./components/Home/Home";
+import SingleProduct from "./components/Home/SingleProduct";
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
@@ -16,7 +17,8 @@ class App extends Component {
     super(props);
       this.state = {
         user: [],
-        allProducts : []
+        allProducts : [],
+        selectedProd: []
       }
   }
 
@@ -65,6 +67,16 @@ componentDidMount () {
    })
  }
 
+ goToSingleProd = async (product) =>{
+  const jwt = localStorage.getItem('token')
+  let response = await axios.get(`https://localhost:44394/api/product/${product.ProductId}`, {headers: {Authorization: 'Bearer ' + jwt}})
+  console.log("getAllProducts :", response.data, "token: ", response.data.token)
+  this.setState({
+    selectedProd: response.data
+  })
+  window.location = '/Product';
+
+ }
 
 
  logOutUser = async () =>{
@@ -88,11 +100,12 @@ componentDidMount () {
             {console.log("renderUser :", user)}
           if(!user){
             return <Redirect to="/Login" />;}
-            else{ return <Home {...props} user = {user} allProducts = {this.state.allProducts}/>}}} />;
+            else{ return <Home {...props} user = {user} allProducts = {this.state.allProducts} goToSingleProd = {this.goToSingleProd}/>}}} />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" component={ShoppingCart} />
           <Route path="/create" component={CreateListing} />
+          <Route path="/Product" component={SingleProduct} />
         </Switch>
       </div>
       </div>
