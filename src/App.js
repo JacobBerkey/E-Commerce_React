@@ -8,7 +8,7 @@ import Home from "./components/Home/Home";
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
 componentDidMount () {
   const jwt = localStorage.getItem('token');
   try{
-    const user = jwt_decode(jwt);
+    const user = jwtDecode(jwt);
     this.setState({user});
   } catch {}
 }
