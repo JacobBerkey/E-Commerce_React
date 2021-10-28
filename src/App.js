@@ -19,6 +19,7 @@ class App extends Component {
         user: "",
         allProducts : [],
         shoppingCart : [],
+        selectedProd: []
       }
   }
 
@@ -71,12 +72,13 @@ componentDidMount () {
 
  goToSingleProd = async (product) =>{
   const jwt = localStorage.getItem('token')
-  let response = await axios.get(`https://localhost:44394/api/product/${product.ProductId}`, {headers: {Authorization: 'Bearer ' + jwt}})
+  let response = await axios.get(`https://localhost:44394/api/product/${product.productId}`, {headers: {Authorization: 'Bearer ' + jwt}})
   console.log("getAllProducts :", response.data, "token: ", response.data.token)
   this.setState({
     selectedProd: response.data
   })
   window.location = '/Product';
+}
 
  getItemsInShoppingCart = async()=>{
   const jwt = localStorage.getItem('token');
@@ -116,14 +118,14 @@ componentDidMount () {
             return <Redirect to="/Login" />;
           }
           else{ 
-            return <Home {...props} user={user} allProducts = {this.state.allProducts} addItemToCart={this.addItemToCart} />
+            return <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />
           }}
             } />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
-          <Route path="/create" component={CreateListing} />
-          <Route path="/Product" component={SingleProduct} />
+          {/* <Route path="/create" component={CreateListing} /> */}
+          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
         </Switch>
       </div>
       </div>
