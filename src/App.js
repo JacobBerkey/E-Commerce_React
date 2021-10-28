@@ -8,16 +8,26 @@ import Home from "./components/Home/Home";
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 class App extends Component {
   constructor(props){
     super(props);
       this.state = {
-        logged_in_user: [],
+        user: [],
       }
   }
 
  
+componentDidMount () {
+  const jwt = localStorage.getItem('token');
+  try{
+    const user = jwtDecode(jwt);
+    this.setState({user});
+  } catch {}
+}
+
+
   createNewUser = async(User)=>{
   console.log("createNewUserFunction:",User)
   try{
@@ -39,20 +49,24 @@ class App extends Component {
       console.log("Username and/or Password invalid. Please try again", err)
    }
  }
-
+ 
+ logOutUser = async () =>{
+  localStorage.removeItem('token');
+ }
 
   render () {
     const user = this.state.user;
     return (
       <div>
-        <NavBar /> 
+        <NavBar logOutUser={this.logOutUser} /> 
         <SearchBar />
+
       <div className='App'>
         <Switch>
-          <Route path="/" render={props => {
-              if (!user){
-              return <Redirect to="/Login" />;}
-              else{return < Home {...props}/>}}}/>
+          <Route path="/Home" render={props => { 
+          if(!user){
+            return <Redirect to="/Login" />;}
+            else{ return <Home {...props} />}}} />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" component={ShoppingCart} />

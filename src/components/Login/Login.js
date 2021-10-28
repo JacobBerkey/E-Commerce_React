@@ -142,7 +142,7 @@ const theme = createTheme();
                                 </Grid>
                             <Grid item>
                                 {/* Place a link to sign up below */}
-                                <Link href="#" variant="body2">
+                                <Link to="/Register" variant="body2">
                                 {"Don't have an account? Sign Up"}
                                 </Link>
                                 </Grid>
