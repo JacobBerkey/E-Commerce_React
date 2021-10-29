@@ -6,6 +6,7 @@ import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Home from "./components/Home/Home";
 import SingleProduct from "./components/Home/SingleProduct";
+import ProfileScreen from "./components/Login/ProfileScreen";
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
@@ -33,7 +34,7 @@ componentDidMount () {
   this.getAllProducts();
 
   } catch (err) {
-    console.log("Get All products", err)
+    console.log("component did mount error", err)
   }
 }
 
@@ -54,7 +55,7 @@ componentDidMount () {
      const response = await axios.post('https://localhost:44394/api/authentication/login', userCredentials)
      localStorage.setItem('token', response.data.token)
      console.log("token: ", response.data.token)
-      window.location = '/home';
+      window.location = '/Home';
    }
    catch (err){
       console.log("Username and/or Password invalid. Please try again", err)
@@ -73,11 +74,13 @@ componentDidMount () {
  goToSingleProd = async (product) =>{
   const jwt = localStorage.getItem('token')
   let response = await axios.get(`https://localhost:44394/api/product/${product.productId}`, {headers: {Authorization: 'Bearer ' + jwt}})
-  console.log("getAllProducts :", response.data, "token: ", response.data.token)
+  console.log("Get Single Product :", response.data, "token: ", response.data.token)
   this.setState({
     selectedProd: response.data
   })
+  console.log("End of goToSingleProd", this.state.selectedProd)
   window.location = '/Product';
+  
 }
 
  getItemsInShoppingCart = async()=>{
@@ -96,6 +99,7 @@ componentDidMount () {
 
  logOutUser = async () =>{
   localStorage.removeItem('token');
+  window.location = '/Login'
  }
 
   sendUserToSignUp = async() =>{
@@ -104,28 +108,27 @@ componentDidMount () {
 
   render () {
     var user = this.state.user;
+    console.log("Entering Render On App.js")
     return (
       <div>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
         <SearchBar />
       <div className='App'>
         <Switch>
-          <Route path="/Home" render={props => { 
-            {console.log("renderUser :", user)}
-
-          {console.log("App - user: ", this.state.user)}
+          <Route path="/Profile" exact render={props => { 
           if(!user){
             return <Redirect to="/Login" />;
           }
           else{ 
-            return <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />
+            return <ProfileScreen {...props} user={user} />
           }}
-            } />;
+        } />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
-          {/* <Route path="/create" component={CreateListing} /> */}
+          <Route path="/create" component={CreateListing} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
         </Switch>
       </div>
       </div>

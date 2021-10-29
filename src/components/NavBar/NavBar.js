@@ -6,6 +6,7 @@ import { Button} from '@material-ui/core';
 function NavBar(props) {
     return(
         <nav>
+            {props.user && <h4>Welcome {props.user.email}</h4>}
             <ul>
                 <Link to = '/Home'>
                     <Button>Home</Button>
