@@ -15,7 +15,7 @@ function NavBar(props) {
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
       <Nav.Link href="/Home">Home</Nav.Link>
-      <Nav.Link href="/CreateListing">Create Listing</Nav.Link>
+      <Nav.Link href="/Create">Create Listing</Nav.Link>
       <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
