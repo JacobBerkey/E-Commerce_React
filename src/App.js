@@ -20,7 +20,6 @@ class App extends Component {
       this.state = {
         user: "",
         allProducts : [],
-        shoppingCart : [],
         selectedProd: []
       }
   }
@@ -129,7 +128,7 @@ componentDidMount () {
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
-          <Route path="/Home" exact render={props => <Products {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
         </Switch>
       </div>
       </div>
