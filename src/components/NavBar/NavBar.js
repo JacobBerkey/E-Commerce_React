@@ -1,34 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Button} from '@material-ui/core';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
 function NavBar(props) {
     return(
-        <nav>
-            {props.user && <h4>Welcome {props.user.email}</h4>}
-            <ul>
-                <Link to = '/Home'>
-                    <Button>Home</Button>
-                </Link>
-                <Link to='/Login'>
-                    <Button>Login</Button>
-                </Link>
-                <Link to='/Login'>
-                    {console.log("navbar: ", props)}
-                    <Button onClick={props.logOutUser}>LogOut</Button>
-                </Link>
-                <Link to='/Register'>
-                    <Button>Register</Button>
-                </Link>
-                <Link to='/shoppingcart'>
-                    <Button>Shopping Cart</Button>
-                </Link>
-                <Link to='/create'>
-                    <Button>Create Listing</Button>
-                </Link>
-            </ul>
-        </nav>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Container>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+      <Nav.Link href="/Home">Home</Nav.Link>
+      <Nav.Link href="/CreateListing">Create Listing</Nav.Link>
+      <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+    <Nav>
+      <Nav.Link href="/Login">Login</Nav.Link>
+      <Nav.Link eventKey={2} href="/ShoppingCart">
+        Cart
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+  </Container>
+</Navbar>
     );
 }
 export default NavBar;
