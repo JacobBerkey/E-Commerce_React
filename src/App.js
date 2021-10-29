@@ -7,6 +7,7 @@ import CreateListing from "./components/CreateListing/CreateListing";
 import Home from "./components/Home/Home";
 import SingleProduct from "./components/Home/SingleProduct";
 import ProfileScreen from "./components/Login/ProfileScreen";
+import Products from "./components/Home/Products";
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
@@ -54,7 +55,7 @@ componentDidMount () {
    try{
      const response = await axios.post('https://localhost:44394/api/authentication/login', userCredentials)
      localStorage.setItem('token', response.data.token)
-     console.log("token: ", response.data.token)
+     console.log("ttttoken: ", response.data.token)
       window.location = '/Home';
    }
    catch (err){
@@ -79,7 +80,7 @@ componentDidMount () {
     selectedProd: response.data
   })
   console.log("End of goToSingleProd", this.state.selectedProd)
-  window.location = '/Product';
+  // window.location = '/Product';
   
 }
 
@@ -128,7 +129,7 @@ componentDidMount () {
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Home" exact render={props => <Products {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
         </Switch>
       </div>
       </div>

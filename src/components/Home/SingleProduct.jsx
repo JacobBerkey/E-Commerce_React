@@ -8,8 +8,8 @@ const SingleProduct = (props) =>{
     return (
         
             <div>
-            <h1>Single Product Will Go Here</h1>
-            <h2> {props.product.name} </h2>
+                <h1>Single Product Will Go Here</h1>
+                <h2> {props.product.name} </h2> 
             </div>
             
     );
