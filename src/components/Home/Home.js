@@ -5,7 +5,7 @@ import Products from './Products';
 
 
 
-export default class MusicTable extends React.Component {
+export default class Home extends React.Component {
     state = {
         products: [],
     };
@@ -41,6 +41,7 @@ render() {
                     <td>{product.description}</td>
                     <td>${product.price}</td>
                     <td>{product.rating}</td>
+                    <button>Add Item To Cart</button>
                 </tr>
                 ))}
             </tbody>
