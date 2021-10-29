@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import {Table} from 'react-bootstrap';
+import {Button} from '@material-ui/core';
 
 
 
@@ -27,7 +28,13 @@ class ShoppingCart extends Component {
         })
         console.log("ShoppingCart :", this.state.shoppingCart)
        }
-  
+       
+    deleteItem =async(productId) =>{
+        const jwt = localStorage.getItem('token');
+        let response = await axios.delete(`https://localhost:44394/api/shoppingcart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
+        this.getShoppingCart();
+        return response.status
+    }
 
    
 
@@ -37,7 +44,7 @@ class ShoppingCart extends Component {
                 <Table  striped bordered hover>
                             <thead>
                                 <tr>
-                                <th>PRODUCT NAME</th>
+                                <th>PRODUCT</th>
                                 <th>CATEGORY</th>
                                 <th>DESCRIPTION</th>
                                 <th>QUANTITY</th>
@@ -52,6 +59,7 @@ class ShoppingCart extends Component {
                                 <td>{product.description}</td>
                                 <td>{product.quantity}</td>
                                 <td>{product.extendedPrice}</td>
+                                <Button variant="contained" onClick={()=>this.deleteItem(product.productId)}>Delete</Button>
                                 </tr>   
                             </tbody>
                             ))}
