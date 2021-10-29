@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { Button } from 'react-bootstrap';
-import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
 
 
 
@@ -43,7 +42,7 @@ function CreateListing() {
                     <br />
                     </Row>
                     <br />
-                    <Button variant="danger">Submit</Button>
+                    <Button variant="primary">Submit</Button>
                 </Form>
         </React.Fragment>
     )

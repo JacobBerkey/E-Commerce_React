@@ -1,0 +1,13 @@
+
+ToDo:
+
+Jacob - Create Listing:
+        Add state, handleChange, handleSubmit, Axios Post new product - 
+
+Alex-  Link next to each product to View Product Details (Name, Description, Price) 
+        Link on the product detail page to addToCart 
+
+Justin- Table or List on shopping cart page to view product information 
+
+Steven- Search Bar Button 
+        Home Page Product Listing (Table or List with Name, description, price) 

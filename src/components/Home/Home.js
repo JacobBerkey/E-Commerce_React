@@ -31,6 +31,7 @@ render() {
                     <th>Description</th>
                     <th>Price</th>
                     <th>Average Rating</th>
+                    <th> Add To Cart</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +42,7 @@ render() {
                     <td>{product.description}</td>
                     <td>${product.price}</td>
                     <td>{product.rating}</td>
-                    <button>Add Item To Cart</button>
+                    <td><button onClick>Add Item To Cart</button></td>
                 </tr>
                 ))}
             </tbody>
