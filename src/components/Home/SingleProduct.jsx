@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {Button, Griad, Paper, Box} from '@material-ui/core'
+import Rating from '@mui/material/Rating';
+import "./SingleProduct.css"
+import JazzBass from "../../Images/JazzBass.png"
 
 
 function SingleProduct (props) {
 
-
+    const [value, setValue] = React.useState(props.product.rating);
     const [reviewBody, setReviewBody] = useState();
     
 
@@ -35,32 +38,61 @@ function SingleProduct (props) {
         console.log("handleSubmit Review", review);
     }
         return (
-            <div>
-                <div>
-                    <h1>Single Product Will Go Here</h1>
-                    <h2> {props.product.name} </h2> 
-                </div>
-                
-                <div>
-                    <Button onClick={handleClick}>Add To Cart</Button>
-                </div>
-                
-                <div>
-                    <h2>Reviews Here</h2>
-                    <ul>
-                        {props.prodReview.map(review =>
-                        <div>
-                            <li>{review.reviewBody}</li>
-                        </div>
-                        )}
-                    </ul>
-                </div>
-               
-                <form onSubmit={handleSubmit}>
-                <input name="reviewBody" onChange={handleChange} value={reviewBody} placeholder="Add a public review..."/>
-                <button type="submit">Comment</button>
-                </form>
+            <div className="bigcontainer">
+                <div className="container">
+                    
+                    <div className="left-column">
+                        <img src={JazzBass} alt="product image"></img>
+                    </div>
 
+                    <div className="right-column">
+                        <div className="product-description">
+                            <span>{props.product.category}</span>
+                            <h1> {props.product.name} </h1> 
+                            <p>{props.product.description}</p>
+
+                        <div className="product-price">
+                            <span>${props.product.price}</span>
+                        </div>
+                        
+                        <div className="cartButton">
+                            <Button size="large" variant="contained" onClick={handleClick}>Add To Cart</Button>
+                        </div>
+
+                        <div className="rating">
+                        <Rating
+                                name="simple-controlled"
+                                value={value}
+                                onChange={(event, newValue) => {
+                                setValue(newValue);
+                                }}
+                            />
+                        </div>
+                        
+                    
+                        <div className="reviews">
+                            <h2>Reviews</h2>
+                            <ul>
+                                {props.prodReview.map(review =>
+                                <div>
+                                    <li>{review.reviewBody}</li>
+                                </div>
+                                )}
+                            </ul>
+                        </div>
+
+                        <form onSubmit={handleSubmit}>
+                            <input class="inputBox" name="reviewBody" onChange={handleChange} value={reviewBody} placeholder="Add a review..."/>
+                            <div className="buttonReview">
+                                <Button type="submit" size="large" variant="contained">Submit</Button>
+                            </div>
+                        </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         );
 }
