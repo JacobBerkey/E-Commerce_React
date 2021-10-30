@@ -17,9 +17,15 @@ const Home = (props) =>{
              <Grid justifyContent="center">
                  <SearchBar searchForProduct={props.searchForProduct}/>
             <Grid className="app-container" style={{marginRight: "200px"}}>
-            
-            <div >
-            <h1> Product List </h1>
+            <div>
+            <div style={{marginLeft: "125px", fontFamily: "monospace"}} >
+                <h1 > Music Plus </h1> <br/>
+                
+                <div style={{marginLeft: "670px", marginBottom: "50px", fontFamily: "fantasy"}}>
+                <h5> "Where artists are born" </h5>
+               </div><div style={{marginBottom: "100px", marginLeft: "40px", borderRadius: "3px"}}><hr/></div>
+
+            </div>
             <div>
             <Table>
                
