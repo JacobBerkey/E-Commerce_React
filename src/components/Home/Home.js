@@ -21,7 +21,7 @@ const Home = (props) =>{
                         <th>Description</th>
                         <th>Price</th>
                         <th>Average Rating</th>
-                        <th> Add To Cart</th>
+                        <th> View Product</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,7 @@ const Home = (props) =>{
                         <td>{product.description}</td>
                         <td>${product.price}</td>
                         <td>{product.rating}</td>
-                        <td><button onClick>Add Item To Cart</button></td>
-                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);}}
+                                            <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);}}
                     // Component ={Link}
                     // to ="/Product"
                 >           View Product</Button></Link></td>

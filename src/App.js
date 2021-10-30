@@ -91,10 +91,12 @@ componentDidMount () {
   })
  }
 
- addItemToCart = async (productId) => {
+ addItemToCart = async (product) => {
+   console.log("addItemToCart :", product)
+   const id = product.productId
   const jwt = localStorage.getItem('token');
-  let response = await axios.post(`https://localhost:44394/api/shoppingcart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
-  this.getItemsInShoppingCart();
+  console.log("AddItem :", id, "jwt :", jwt)
+  let response = await axios.post(`https://localhost:44394/api/shoppingcart/${id}/`, product, {headers: {Authorization: 'Bearer ' + jwt}});
  }
 
  logOutUser = async () =>{
@@ -127,8 +129,8 @@ componentDidMount () {
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
-          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd}  />} />
         </Switch>
       </div>
       </div>

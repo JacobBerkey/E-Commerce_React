@@ -1,6 +1,32 @@
 
 ToDo:
 
+        Added Seperate Logout button (Would be nice to have it say login/logout depending on token)
+
+        Home Page:
+        Search Filter
+        Search Bar and Button 
+        Remove Add to Cart Button and replace it with View Product
+
+
+        Product Detail Page:
+        Axios GET review Product Detail Page.
+        Axios Post review Product Detail page.
+
+        ShoppingCart:
+        Fix Insert_identity issue in backend to add to shoppingcart.
+        
+      
+        Seed Databade - Jacob
+
+        ***Average Rating
+
+
+
+
+
+
+
 Jacob - Create Listing:
         Add state, handleChange, handleSubmit, Axios Post new product - 
 

@@ -26,6 +26,7 @@ function NavBar(props) {
     </Nav>
     <Nav>
       <Nav.Link href="/Login">Login</Nav.Link>
+      <Nav.Link onClick={props.logOutUser} href="/Login">Logout</Nav.Link>
       <Nav.Link eventKey={2} href="/ShoppingCart">
         Cart
       </Nav.Link>
