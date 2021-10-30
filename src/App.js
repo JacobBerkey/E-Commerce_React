@@ -121,11 +121,12 @@ componentDidMount () {
   console.log("addReview Review", review);
   const jwt = localStorage.getItem('token');
   let response = await axios.post(`https://localhost:44394/api/review/${review.productId}`, review, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.getReviews(review.productId)
  }
 
  getReviews = async (product) => {
   const jwt = localStorage.getItem('token');
-  let response = await axios.get(`https://localhost:44394/api/review/${product.productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
+  let response = await axios.get(`https://localhost:44394/api/review/${product}`, {headers: {Authorization: 'Bearer ' + jwt}});
   this.setState({
   prodReview: response.data
   })
