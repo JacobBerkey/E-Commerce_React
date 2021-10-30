@@ -10,10 +10,11 @@ ToDo:
         Change the color of the product table on Home page. - Complete - Justin
 
         ALEX: 
-        Added Seperate Logout button (Would be nice to have it say login/logout depending on token) -
-        Product Detail Page:
-        Axios GET review Product Detail Page. - In Progress - Alex
-        Axios Post review Product Detail page. - In Progress - Alex
+        -Completed logic of single product page
+        
+        -Working on ***Adding Seperate Logout button (Would be nice to have it say login/logout depending on token) -
+        
+        -Working on styleing of single product 
 
         ShoppingCart:
         Fix Insert_identity issue in backend to add to shoppingcart.- (Issue seems to have been an authentication issue that was resolved by loggin out and back in) - Justin
