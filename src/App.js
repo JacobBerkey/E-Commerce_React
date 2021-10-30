@@ -20,7 +20,8 @@ class App extends Component {
       this.state = {
         user: "",
         allProducts : [],
-        selectedProd: []
+        selectedProd: [],
+        prodReview: []
       }
   }
 
@@ -79,22 +80,27 @@ componentDidMount () {
     selectedProd: response.data
   })
   console.log("End of goToSingleProd", this.state.selectedProd)
-  // window.location = '/Product';
-  
+  // window.location = '/Product'; 
 }
-
- getItemsInShoppingCart = async()=>{
-  const jwt = localStorage.getItem('token');
-  let response = await axios.post(`https://localhost:44394/api/shoppingcart`, {headers: {Authorization: 'Bearer ' + jwt}});
-  this.setState({
-    shoppingCart : response.data
-  })
- }
 
  addItemToCart = async (productId) => {
   const jwt = localStorage.getItem('token');
   let response = await axios.post(`https://localhost:44394/api/shoppingcart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
   this.getItemsInShoppingCart();
+ }
+
+ addReview = async (review) => {
+  console.log("addReview Review", review);
+  const jwt = localStorage.getItem('token');
+  let response = await axios.post(`https://localhost:44394/api/review/${review.productId}`, review, {headers: {Authorization: 'Bearer ' + jwt}});
+ }
+
+ getReviews = async (product) => {
+  const jwt = localStorage.getItem('token');
+  let response = await axios.get(`https://localhost:44394/api/review/${product.productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.setState({
+  prodReview: response.data
+  })
  }
 
  logOutUser = async () =>{
@@ -127,8 +133,8 @@ componentDidMount () {
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
-          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} prodReview={this.state.prodReview} addReview={this.addReview} />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} getReviews={this.getReviews} />} />
         </Switch>
       </div>
       </div>

@@ -33,7 +33,7 @@ const Home = (props) =>{
                         <td>${product.price}</td>
                         <td>{product.rating}</td>
                         <td><button onClick>Add Item To Cart</button></td>
-                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);}}
+                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product); props.getReviews(product)}}
                     // Component ={Link}
                     // to ="/Product"
                 >           View Product</Button></Link></td>
