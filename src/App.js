@@ -85,7 +85,6 @@ componentDidMount () {
 }
 
  searchForProduct = async (searchTerm) =>{
-   console.log("searchForProduct Function: ", searchTerm)
   const filteredList = [];
   const filter = this.state.allProducts.filter( function (product){
     if(
@@ -94,15 +93,12 @@ componentDidMount () {
       product.description.toLowerCase() == searchTerm.toLowerCase())
     {
       filteredList.push(product);
-      console.log("searchForProduct FilteredList :", filteredList)
     }
   });
   this.setState({
     allProducts : filteredList
   })
  };
-
-
 
 
  getItemsInShoppingCart = async()=>{
@@ -136,8 +132,6 @@ componentDidMount () {
     return (
       <Grid>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
-
-        <SearchBar searchForProduct={this.searchForProduct}/>
       <div className='App'>
         <Switch>
           <Route path="/Profile" exact render={props => { 
@@ -153,7 +147,8 @@ componentDidMount () {
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd}  />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
+          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} />} />
         </Switch>
       </div>
       </Grid>

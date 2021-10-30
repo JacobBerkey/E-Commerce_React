@@ -10,13 +10,12 @@ import {Form} from 'react-bootstrap';
 
     const handleChange = (event) => {
        setSearchTerm(event.target.value)
-       console.log("searchTerm :", searchTerm)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("searchTerm :", searchTerm, "props :", props)
         props.searchForProduct(searchTerm);
+        
     }
 
     

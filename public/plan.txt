@@ -1,18 +1,19 @@
 
 ToDo:
 
-        Added Seperate Logout button (Would be nice to have it say login/logout depending on token)
+         
 
         Home Page:
-        Search Filter - In Progress - Justin
+        Search Filter - Complete - Justin
         Search Bar and Button - Complete - Justin
         Remove Add to Cart Button and replace it with View Product - Complete - Justin
         Change the color of the product table on Home page. - Complete - Justin
 
-
+        ALEX: 
+        Added Seperate Logout button (Would be nice to have it say login/logout depending on token) -
         Product Detail Page:
-        Axios GET review Product Detail Page.
-        Axios Post review Product Detail page.
+        Axios GET review Product Detail Page. - In Progress - Alex
+        Axios Post review Product Detail page. - In Progress - Alex
 
         ShoppingCart:
         Fix Insert_identity issue in backend to add to shoppingcart.- (Issue seems to have been an authentication issue that was resolved by loggin out and back in) - Justin

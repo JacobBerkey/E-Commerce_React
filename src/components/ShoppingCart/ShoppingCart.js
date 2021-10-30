@@ -40,7 +40,8 @@ class ShoppingCart extends Component {
 
     render() { 
         return ( 
-            <div style={{marginRight: "350px", marginLeft: "250px"}} >
+            <div style={{marginRight: "450px", marginLeft: "250px"}} >
+                <h1 style={{marginLeft: "100px", marginBottom: "100px", marginTop: "80px"}}>Shopping Cart</h1>
                 <Table  striped bordered hover>
                             <thead>
                                 <tr>
@@ -59,7 +60,9 @@ class ShoppingCart extends Component {
                                 <td>{product.description}</td>
                                 <td>{product.quantity}</td>
                                 <td>{product.extendedPrice}</td>
-                                <Button variant="contained" onClick={()=>this.deleteItem(product.productId)}>Delete</Button>
+                               <td> <Button variant="contained" onClick={()=>this.deleteItem(product.productId)} 
+                                    style={{paddingBottom: "10px", paddingTop: "10px", marginTop: "5px"}}   
+                                    >Delete</Button></td>
                                 </tr>   
                             </tbody>
                             ))}
