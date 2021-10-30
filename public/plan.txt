@@ -4,7 +4,7 @@ ToDo:
         Added Seperate Logout button (Would be nice to have it say login/logout depending on token)
 
         Home Page:
-        Search Filter
+        Search Filter - In Progress - Justin
         Search Bar and Button - Complete - Justin
         Remove Add to Cart Button and replace it with View Product - Complete - Justin
         Change the color of the product table on Home page. - Complete - Justin
