@@ -1,8 +1,10 @@
 import React from 'react';
 import './Home.css'
 import axios from 'axios'
-import {Button} from '@material-ui/core';
+import {Button, Grid} from '@material-ui/core';
 import {Link} from "react-router-dom";
+import {Table} from 'react-bootstrap';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 
@@ -11,17 +13,24 @@ const Home = (props) =>{
 
 
         return(
-            <div className="app-container">
+
+             <Grid justifyContent="center">
+                 <SearchBar searchForProduct={props.searchForProduct}/>
+            <Grid className="app-container" style={{marginRight: "200px"}}>
+            
+            <div >
             <h1> Product List </h1>
-            <table>
-                <thead>
+            <div>
+            <Table>
+               
+                <thead style={{backgroundColor: "#6c757d", color: "white"}}>
                     <tr>
                         <th>Product Name</th>
                         <th>Category</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Average Rating</th>
-                        <th> Add To Cart</th>
+                        <th> View Product</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,16 +41,18 @@ const Home = (props) =>{
                         <td>{product.description}</td>
                         <td>${product.price}</td>
                         <td>{product.rating}</td>
-                        <td><button onClick>Add Item To Cart</button></td>
-                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product); props.getReviews(product)}}
+                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product)}}
                     // Component ={Link}
                     // to ="/Product"
-                >           View Product</Button></Link></td>
+                        >View Product</Button></Link></td>
                     </tr>
                     ))}
                 </tbody>
-            </table>
-        </div>   
+            </Table>
+            </div>
+        </div>  
+        </Grid>
+        </Grid>
         )
     
 }

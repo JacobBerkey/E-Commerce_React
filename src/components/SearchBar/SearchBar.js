@@ -1,40 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import "./SearchBar.css"
-import {Paper, TextField} from '@material-ui/core';
+import {Button, Container, Grid, Paper, TextField} from '@material-ui/core';
+import {Form} from 'react-bootstrap';
 
-class SearchBar extends Component {
-    constructor(props) {
-        super(props);
-            this.state = {
-                searchQuery: '',
-            }
+    const SearchBar = (props) =>{
+
+        const[searchTerm, setSearchTerm] = useState();
+
+
+    const handleChange = (event) => {
+       setSearchTerm(event.target.value)
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        this.props.searchProduct(this.state.searchQuery);
+        props.searchForProduct(searchTerm);
+        
     }
 
-    render() {
-        return (
-            <containter>
-                <form onSubmit={(event) => this.handleSubmit(event)}>
-                <div className="search-bar"> 
-                <input className="input" type="text" name="searchQuery" placeholder="Search..."
-                onChange={this.handleChange} value={this.searchQuery}/>
-                <button className="button" type="submit">Search</button>
-                </div>
-            </form>
-            </containter>
-            
-        )
-    }
+    
+    return (
+        <Container>
+            <Form onSubmit={handleSubmit}>
+                <Grid className="search-bar"> 
+                    <TextField  fullWidth variant="outlined"
+                    className="input"  type="text" name="searchTerm" placeholder="Search by name, category, description..."
+                    onChange={handleChange} value={searchTerm} />
+                </Grid>
+            </Form>
+        </Container>
+        
+    )
+    
 }
 
 export default SearchBar;

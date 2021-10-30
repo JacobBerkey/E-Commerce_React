@@ -12,6 +12,7 @@ import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import {Grid} from "@material-ui/core";
 
 
 class App extends Component {
@@ -83,10 +84,37 @@ componentDidMount () {
   // window.location = '/Product'; 
 }
 
- addItemToCart = async (productId) => {
+ searchForProduct = async (searchTerm) =>{
+  const filteredList = [];
+  const filter = this.state.allProducts.filter( function (product){
+    if(
+      product.name.toLowerCase() == searchTerm.toLowerCase() ||
+      product.category.toLowerCase() == searchTerm.toLowerCase() ||
+      product.description.toLowerCase() == searchTerm.toLowerCase())
+    {
+      filteredList.push(product);
+    }
+  });
+  this.setState({
+    allProducts : filteredList
+  })
+ };
+
+
+ getItemsInShoppingCart = async()=>{
   const jwt = localStorage.getItem('token');
-  let response = await axios.post(`https://localhost:44394/api/shoppingcart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
-  this.getItemsInShoppingCart();
+  let response = await axios.post(`https://localhost:44394/api/shoppingcart`, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.setState({
+    shoppingCart : response.data
+  })
+ }
+
+ addItemToCart = async (product) => {
+   console.log("addItemToCart :", product)
+   const id = product.productId
+  const jwt = localStorage.getItem('token');
+  console.log("AddItem :", id, "jwt :", jwt)
+  let response = await axios.post(`https://localhost:44394/api/shoppingcart/${id}/`, product, {headers: {Authorization: 'Bearer ' + jwt}});
  }
 
  addReview = async (review) => {
@@ -116,9 +144,8 @@ componentDidMount () {
     var user = this.state.user;
     console.log("Entering Render On App.js")
     return (
-      <div>
+      <Grid>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
-        <SearchBar />
       <div className='App'>
         <Switch>
           <Route path="/Profile" exact render={props => { 
@@ -133,13 +160,15 @@ componentDidMount () {
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
-          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} prodReview={this.state.prodReview} addReview={this.addReview} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd} addItemToCart={this.addItemToCart} getReviews={this.getReviews} />} />
+          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} prodReview={this.state.prodReview} addReview={this.addReview} />} />
+          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
+          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} />} />
         </Switch>
       </div>
-      </div>
+      </Grid>
     )
   }
-}
+};
 
 export default App;
+
