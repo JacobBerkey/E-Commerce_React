@@ -2,8 +2,16 @@ import React, {useState} from 'react';
 import {Button, Griad, Paper, Box} from '@material-ui/core'
 
 
-const SingleProduct = (props) =>{
+function SingleProduct (props) {
 
+
+    const [reviewBody, setReviewBody] = useState();
+    
+
+    handleChange = (event) => {
+        
+        setReviewBody(event.target.value);      
+    }    
   
     const handleClick = async (event) =>{     
         event.preventDefault();
@@ -17,14 +25,43 @@ const SingleProduct = (props) =>{
         props.addItemToCart(newProduct);
     }
 
-    return (
-        
+    handleSubmit = (event) => {
+        event.preventDefault()
+        var review = {
+            productId: props.product.productId,
+            reviewBody: reviewBody
+        }
+        props.addReview(review)
+        console.log("handleSubmit Review", review);
+    }
+        return (
             <div>
-                <h1>Single Product Will Go Here</h1>
-                <h2> {props.product.name} </h2> 
-                <Button onClick={handleClick}>Add To Cart</Button>
+                <div>
+                    <h1>Single Product Will Go Here</h1>
+                    <h2> {props.product.name} </h2> 
+                </div>
+                
+                <div>
+                    <Button onClick={handleClick}>Add To Cart</Button>
+                </div>
+                
+                <div>
+                    <h2>Reviews Here</h2>
+                    <ul>
+                        {props.prodReview.map(review =>
+                        <div>
+                            <li>{review.reviewBody}</li>
+                        </div>
+                        )}
+                    </ul>
+                </div>
+               
+                <form onSubmit={handleSubmit}>
+                <input name="reviewBody" onChange={this.handleChange} value={reviewBody} placeholder="Add a public review..."/>
+                <button type="submit">Comment</button>
+                </form>
+
             </div>
-            
-    );
+        );
 }
 export default SingleProduct;

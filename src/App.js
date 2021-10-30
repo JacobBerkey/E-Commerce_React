@@ -21,7 +21,8 @@ class App extends Component {
       this.state = {
         user: "",
         allProducts : [],
-        selectedProd: []
+        selectedProd: [],
+        prodReview: []
       }
   }
 
@@ -80,8 +81,7 @@ componentDidMount () {
     selectedProd: response.data
   })
   console.log("End of goToSingleProd", this.state.selectedProd)
-  // window.location = '/Product';
-  
+  // window.location = '/Product'; 
 }
 
  searchForProduct = async (searchTerm) =>{
@@ -117,6 +117,20 @@ componentDidMount () {
   let response = await axios.post(`https://localhost:44394/api/shoppingcart/${id}/`, product, {headers: {Authorization: 'Bearer ' + jwt}});
  }
 
+ addReview = async (review) => {
+  console.log("addReview Review", review);
+  const jwt = localStorage.getItem('token');
+  let response = await axios.post(`https://localhost:44394/api/review/${review.productId}`, review, {headers: {Authorization: 'Bearer ' + jwt}});
+ }
+
+ getReviews = async (product) => {
+  const jwt = localStorage.getItem('token');
+  let response = await axios.get(`https://localhost:44394/api/review/${product.productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
+  this.setState({
+  prodReview: response.data
+  })
+ }
+
  logOutUser = async () =>{
   localStorage.removeItem('token');
   window.location = '/Login'
@@ -146,9 +160,9 @@ componentDidMount () {
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" component={CreateListing} />
-          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} />} />
+          <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} prodReview={this.state.prodReview} addReview={this.addReview} />} />
           <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
-          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} />} />
+          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} />} />
         </Switch>
       </div>
       </Grid>
@@ -157,3 +171,4 @@ componentDidMount () {
 };
 
 export default App;
+

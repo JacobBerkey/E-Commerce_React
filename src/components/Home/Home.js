@@ -47,7 +47,7 @@ const Home = (props) =>{
                         <td>{product.description}</td>
                         <td>${product.price}</td>
                         <td>{product.rating}</td>
-                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);}}
+                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product)}}
                     // Component ={Link}
                     // to ="/Product"
                         >View Product</Button></Link></td>
