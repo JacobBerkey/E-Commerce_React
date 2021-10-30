@@ -8,7 +8,7 @@ function SingleProduct (props) {
     const [reviewBody, setReviewBody] = useState();
     
 
-    handleChange = (event) => {
+    const handleChange = (event) => {
         
         setReviewBody(event.target.value);      
     }    
@@ -25,7 +25,7 @@ function SingleProduct (props) {
         props.addItemToCart(newProduct);
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         var review = {
             productId: props.product.productId,
@@ -57,7 +57,7 @@ function SingleProduct (props) {
                 </div>
                
                 <form onSubmit={handleSubmit}>
-                <input name="reviewBody" onChange={this.handleChange} value={reviewBody} placeholder="Add a public review..."/>
+                <input name="reviewBody" onChange={handleChange} value={reviewBody} placeholder="Add a public review..."/>
                 <button type="submit">Comment</button>
                 </form>
 

@@ -18,10 +18,10 @@ const Home = (props) =>{
                  <SearchBar searchForProduct={props.searchForProduct}/>
             <Grid className="app-container" style={{marginRight: "200px"}}>
             <div>
-            <div style={{marginLeft: "125px", fontFamily: "monospace"}} >
-                <h1 > Music Plus </h1> <br/>
+            <div style={{marginLeft: "125px", fontFamily: "initial"}} >
+                <h1 ><strong> Music Plus</strong> </h1> <br/>
                 
-                <div style={{marginLeft: "670px", marginBottom: "50px", fontFamily: "fantasy"}}>
+                <div style={{marginLeft: "660px", marginBottom: "50px", fontFamily: "cursive"}}>
                 <h5> "Where artists are born" </h5>
                </div><div style={{marginBottom: "100px", marginLeft: "40px", borderRadius: "3px"}}><hr/></div>
 
@@ -35,7 +35,7 @@ const Home = (props) =>{
                         <th>Category</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Average Rating</th>
+                        <th>Rating</th>
                         <th> View Product</th>
                     </tr>
                 </thead>
