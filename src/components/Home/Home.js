@@ -15,18 +15,21 @@ const Home = (props) =>{
         return(
 
              <Grid justifyContent="center">
-                 <SearchBar searchForProduct={props.searchForProduct}/>
-            <Grid className="app-container" style={{marginRight: "200px"}}>
-            <div>
-            <div style={{marginLeft: "125px", fontFamily: "initial"}} >
+
+                <div style={{fontFamily: "initial", marginTop: "50px"}} >
                 <h1 ><strong> Music Plus</strong> </h1> <br/>
-                
-                <div style={{marginLeft: "660px", marginBottom: "50px", fontFamily: "cursive"}}>
+                <div style={{marginLeft: "830px", marginBottom: "50px", fontFamily: "cursive"}}>
                 <h5> "Where artists are born" </h5>
                </div><div style={{marginBottom: "100px", marginLeft: "40px", borderRadius: "3px"}}><hr/></div>
+                </div>
 
-            </div>
+                 <SearchBar searchForProduct={props.searchForProduct}/>
+
+            <Grid className="app-container" style={{marginRight: "200px"}}>
             <div>
+            
+            <div>
+                
             <Table>
                
                 <thead style={{backgroundColor: "#6c757d", color: "white"}}>

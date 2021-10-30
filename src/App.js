@@ -85,6 +85,7 @@ componentDidMount () {
 }
 
  searchForProduct = async (searchTerm) =>{
+   try{
   const filteredList = [];
   const filter = this.state.allProducts.filter( function (product){
     if(
@@ -97,7 +98,10 @@ componentDidMount () {
   });
   this.setState({
     allProducts : filteredList
-  })
+  })}
+  catch{
+    alert("Please try correct spelling")
+  }
  };
 
 
