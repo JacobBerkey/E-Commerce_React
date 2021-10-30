@@ -12,6 +12,7 @@ import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import {Grid} from "@material-ui/core";
 
 
 class App extends Component {
@@ -112,8 +113,9 @@ componentDidMount () {
     var user = this.state.user;
     console.log("Entering Render On App.js")
     return (
-      <div>
+      <Grid>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
+        
         <SearchBar />
       <div className='App'>
         <Switch>
@@ -133,9 +135,9 @@ componentDidMount () {
           <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} goToSingleProd={this.goToSingleProd}  />} />
         </Switch>
       </div>
-      </div>
+      </Grid>
     )
   }
-}
+};
 
 export default App;

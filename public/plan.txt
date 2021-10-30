@@ -5,8 +5,9 @@ ToDo:
 
         Home Page:
         Search Filter
-        Search Bar and Button 
-        Remove Add to Cart Button and replace it with View Product
+        Search Bar and Button - Complete - Justin
+        Remove Add to Cart Button and replace it with View Product - Complete - Justin
+        Change the color of the product table on Home page. - Complete - Justin
 
 
         Product Detail Page:
@@ -14,9 +15,12 @@ ToDo:
         Axios Post review Product Detail page.
 
         ShoppingCart:
-        Fix Insert_identity issue in backend to add to shoppingcart.
+        Fix Insert_identity issue in backend to add to shoppingcart.- (Issue seems to have been an authentication issue that was resolved by loggin out and back in) - Justin
         
       
+        Create Listing: 
+        Link to POST product
+        Add Margins and center content
         Seed Databade - Jacob
 
         ***Average Rating

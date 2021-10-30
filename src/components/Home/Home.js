@@ -1,8 +1,9 @@
 import React from 'react';
 import './Home.css'
 import axios from 'axios'
-import {Button} from '@material-ui/core';
+import {Button, Grid} from '@material-ui/core';
 import {Link} from "react-router-dom";
+import {Table} from 'react-bootstrap';
 
 
 
@@ -11,10 +12,13 @@ const Home = (props) =>{
 
 
         return(
-            <div className="app-container">
+            <Grid className="app-container" style={{marginRight: "200px"}}>
+            <div >
             <h1> Product List </h1>
-            <table>
-                <thead>
+            <div>
+            <Table>
+               
+                <thead style={{backgroundColor: "#6c757d", color: "white"}}>
                     <tr>
                         <th>Product Name</th>
                         <th>Category</th>
@@ -39,8 +43,10 @@ const Home = (props) =>{
                     </tr>
                     ))}
                 </tbody>
-            </table>
-        </div>   
+            </Table>
+            </div>
+        </div>  
+        </Grid>
         )
     
 }

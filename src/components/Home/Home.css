@@ -9,22 +9,25 @@
     align-items: center;
     border-collapse: collapse;
     width: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
+    
   }
   
   th,
   td {
-    border: 1px solid #ffffff;
+    border: 1px solid #6c757d;;
     text-align: center;
     padding: 8px;
     font-size: 24px;
   }
   
   th {
-    background-color: rgb(117, 201, 250);
+    background-color: rgb(238, 238, 238);
   }
   
   td {
-    background-color: rgb(205, 235, 253);
+    background-color: rgb(248, 248, 248);
   }
   
 
