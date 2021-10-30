@@ -166,7 +166,7 @@ componentDidMount () {
           <Route path="/create" component={CreateListing} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} prodReview={this.state.prodReview} addReview={this.addReview} />} />
           <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
-          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} />} />
+          goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} getAllProducts={this.getAllProducts}/>} />
         </Switch>
       </div>
       </Grid>

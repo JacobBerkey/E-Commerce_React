@@ -11,6 +11,10 @@ import SearchBar from '../SearchBar/SearchBar';
 const Home = (props) =>{
 
 
+        const handleClick = (event) =>{
+            event.preventDefault();
+            props.getAllProducts();
+        }
 
         return(
 
@@ -24,14 +28,14 @@ const Home = (props) =>{
                 </div>
 
                  <SearchBar searchForProduct={props.searchForProduct}/>
-
+                 <Grid style={{marginLeft: "850px"}}> <Button variant="contained" onClick={handleClick}>Refresh Product List</Button></Grid>
+                
+                 
+                
             <Grid className="app-container" style={{marginRight: "200px"}}>
             <div>
-            
             <div>
-                
             <Table>
-               
                 <thead style={{backgroundColor: "#6c757d", color: "white"}}>
                     <tr>
                         <th>Product Name</th>
@@ -39,7 +43,7 @@ const Home = (props) =>{
                         <th>Description</th>
                         <th>Price</th>
                         <th>Rating</th>
-                        <th> View Product</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>

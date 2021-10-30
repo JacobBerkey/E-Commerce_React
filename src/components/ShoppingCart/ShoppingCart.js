@@ -62,7 +62,7 @@ class ShoppingCart extends Component {
                                 <td>{product.extendedPrice}</td>
                                <td> <Button variant="contained" onClick={()=>this.deleteItem(product.productId)} 
                                     style={{paddingBottom: "10px", paddingTop: "10px", marginTop: "5px"}}   
-                                    >Delete</Button></td>
+                                    >Delete</Button> </td>
                                 </tr>   
                             </tbody>
                             ))}
