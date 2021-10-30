@@ -84,6 +84,27 @@ componentDidMount () {
   
 }
 
+ searchForProduct = async (searchTerm) =>{
+   console.log("searchForProduct Function: ", searchTerm)
+  const filteredList = [];
+  const filter = this.state.allProducts.filter( function (product){
+    if(
+      product.name.toLowerCase() == searchTerm.toLowerCase() ||
+      product.category.toLowerCase() == searchTerm.toLowerCase() ||
+      product.description.toLowerCase() == searchTerm.toLowerCase())
+    {
+      filteredList.push(product);
+      console.log("searchForProduct FilteredList :", filteredList)
+    }
+  });
+  this.setState({
+    allProducts : filteredList
+  })
+ };
+
+
+
+
  getItemsInShoppingCart = async()=>{
   const jwt = localStorage.getItem('token');
   let response = await axios.post(`https://localhost:44394/api/shoppingcart`, {headers: {Authorization: 'Bearer ' + jwt}});
@@ -115,8 +136,8 @@ componentDidMount () {
     return (
       <Grid>
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
-        
-        <SearchBar />
+
+        <SearchBar searchForProduct={this.searchForProduct}/>
       <div className='App'>
         <Switch>
           <Route path="/Profile" exact render={props => { 

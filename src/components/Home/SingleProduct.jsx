@@ -7,6 +7,7 @@ const SingleProduct = (props) =>{
   
     const handleClick = async (event) =>{     
         event.preventDefault();
+        alert("Item added to Cart!")
         console.log("Props :", props)
         var newProduct = {
             productId : props.product.productId,
