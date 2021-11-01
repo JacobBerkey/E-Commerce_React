@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Griad, Paper, Box} from '@material-ui/core'
 import Rating from '@mui/material/Rating';
 import "./SingleProduct.css"
@@ -7,8 +7,12 @@ import JazzBass from "../../Images/JazzBass.png"
 
 function SingleProduct (props) {
 
-    const [value, setValue] = useState(props.product.rating);
+    const [value, setValue] = useState(0);
     const [reviewBody, setReviewBody] = useState();
+
+    useEffect(() => {
+        setValue(props.product.rating)
+    }, [props])
 
     const handleChange = (event) => {
         
