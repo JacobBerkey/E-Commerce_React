@@ -1,11 +1,11 @@
 import React from 'react';
 import './Home.css'
 import axios from 'axios'
-import {Button, Grid} from '@material-ui/core';
+import {Button, Grid, Box} from '@material-ui/core';
 import {Link} from "react-router-dom";
 import {Table} from 'react-bootstrap';
 import SearchBar from '../SearchBar/SearchBar';
-
+import JazzBass from "../../Images/JazzBass.png"
 
 
 const Home = (props) =>{
@@ -16,57 +16,79 @@ const Home = (props) =>{
             props.getAllProducts();
         }
 
+
         return(
+            <div>
 
-             <Grid justifyContent="center">
-
-                <div style={{fontFamily: "initial", marginTop: "50px"}} >
-                <h1 ><strong> Music Plus</strong> </h1> <br/>
-                <div style={{marginLeft: "830px", marginBottom: "50px", fontFamily: "cursive"}}>
-                <h5> "Where artists are born" </h5>
-               </div><div style={{marginBottom: "100px", marginLeft: "40px", borderRadius: "3px"}}><hr/></div>
+                <SearchBar searchForProduct={props.searchForProduct}/>
+                <div className="buttonRefresh">
+                    <Button variant="contained" onClick={handleClick}>Refresh Product List</Button>
+                </div>
+                <div className="saleHeader">
+                    <h3>Products for sale:</h3>
+                </div>
+                    
+                <div className="grid-container">
+                                
+                    {props.allProducts.map((product) => (
+        
+                    <div className="item">
+                        <div className="card">
+                            <img src={JazzBass} alt="product image"></img>
+                            <h3>{product.name}</h3>
+                            <p className="price">${product.price}</p>
+                            <Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product.productId)}}>View Product</Button></Link>
+                        </div>
+                    </div>
+                    ))}
+            
                 </div>
 
-                 <SearchBar searchForProduct={props.searchForProduct}/>
-                 <Grid style={{marginLeft: "850px"}}> <Button variant="contained" onClick={handleClick}>Refresh Product List</Button></Grid>
-                
-                 
-                
-            <Grid className="app-container" style={{marginRight: "200px"}}>
-            <div>
-            <div>
-            <Table>
-                <thead style={{backgroundColor: "#6c757d", color: "white"}}>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Rating</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.allProducts.map((product) => (
-                    <tr>
-                        <td>{product.name}</td>
-                        <td>{product.category}</td>
-                        <td>{product.description}</td>
-                        <td>${product.price}</td>
-                        <td>{product.rating}</td>
-                        <td><Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product.productId)}}
-                    // Component ={Link}
-                    // to ="/Product"
-                        >View Product</Button></Link></td>
-                    </tr>
-                    ))}
-                </tbody>
-            </Table>
             </div>
-        </div>  
-        </Grid>
-        </Grid>
+
+            
         )
     
 }
 export default Home;
+
+{/* <Table>
+                            
+                            <tbody>
+                                {props.allProducts.map((product) => (
+                                    
+                                <tr>
+                                    
+                                    <td>
+                                        {product.name}<br></br>
+                                        ${product.price}<br></br>
+                                        <Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product.productId)}}>View Product</Button></Link>
+                                    </td>
+                           
+                                </tr>
+                                ))}
+                            </tbody>
+                                </Table> */}
+
+{/* <div className="row1">
+
+                        
+
+<h1 >Music Plus</h1> <br/>
+<h5> "Where artists are born" </h5>
+
+
+
+</div>
+
+<div className="row">
+
+<div className="col">
+
+<SearchBar searchForProduct={props.searchForProduct}/>
+<Grid style={{marginLeft: "850px"}}> <Button variant="contained" onClick={handleClick}>Refresh Product List</Button></Grid>
+
+</div>
+
+</div> */}
+
