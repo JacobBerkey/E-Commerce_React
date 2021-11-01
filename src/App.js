@@ -160,21 +160,22 @@ componentDidMount () {
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
       <div className='App'>
         <Switch>
-          <Route path="/" exact render={props => { 
-          if(!user){
-            return <Redirect to="/Login" />;
-          }
-          else{ 
-            return <ProfileScreen {...props} user={user} />
-          }}
-        } />;
+          <Route path="/Profile" exact render={props => { 
+            if(!user){
+              return <Redirect to="/Login" />;
+            }
+            else{ 
+              return <ProfileScreen {...props} user={user} />
+            }}
+            } />;
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
           <Route path="/create" render={props => <CreateListing {...props} createAProduct={this.createAProduct} />} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} prodReview={this.state.prodReview} addReview={this.addReview} />} />
-          <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
+          <Route path="/Home" exact={true} render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
           goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} getAllProducts={this.getAllProducts}/>} />
+          <Login userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>
         </Switch>
       </div>
       </Grid>

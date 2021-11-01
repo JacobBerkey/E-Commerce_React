@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Griad, Paper, Box} from '@material-ui/core'
 import Rating from '@mui/material/Rating';
 import "./SingleProduct.css"
 import JazzBass from "../../Images/JazzBass.png"
+import axios from 'axios';
 
 
 function SingleProduct (props) {
 
-    const [value, setValue] = useState(props.product.rating);
+    const [value, setValue] = useState(0);
     const [reviewBody, setReviewBody] = useState();
+
+    useEffect(() => {
+        setValue(props.product.rating)
+    }, [props])
+
+    // * Helper Functions
 
     const handleChange = (event) => {
         
@@ -26,6 +33,7 @@ function SingleProduct (props) {
         console.log(newProduct)
         props.addItemToCart(newProduct);
     }
+
 
     const handleSubmit = (event) => {
         event.preventDefault()
