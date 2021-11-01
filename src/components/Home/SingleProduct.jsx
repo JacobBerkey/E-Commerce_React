@@ -15,8 +15,6 @@ function SingleProduct (props) {
         setValue(props.product.rating)
     }, [props])
 
-    // * Helper Functions
-
     const handleChange = (event) => {
         
         setReviewBody(event.target.value);      

@@ -35,7 +35,7 @@ const Home = (props) =>{
                     <div className="item">
                         <div className="card">
                             <img src={JazzBass} alt="product image"></img>
-                            <h3>{product.name}</h3>
+                            <h6>{product.name}</h6>
                             <p className="price">${product.price}</p>
                             <Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product.productId)}}>View Product</Button></Link>
                         </div>

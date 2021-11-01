@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Logo from "../../Images/GearPros.png"
 
 
 function NavBar(props) {
@@ -13,6 +14,9 @@ function NavBar(props) {
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Container>
+        <a class="navbar-brand" href="#">
+        <img src={Logo} alt="..." height="75" width="75"></img>
+        </a>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
