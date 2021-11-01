@@ -145,6 +145,12 @@ componentDidMount () {
     window.location = '/Register';
  }
 
+ createAProduct = async (product) => {
+  let response = await axios.post(`https://localhost:44394/api/product/`, product)
+  this.getAllProducts(); 
+  return response.status; 
+}
+
   render () {
     var user = this.state.user;
     console.log("Entering Render On App.js")
@@ -164,7 +170,7 @@ componentDidMount () {
           <Route path="/Login" render ={props => <Login {...props} userSignIn={this.userSignIn} sendUserToSignUp={this.sendUserToSignUp}/>} />
           <Route path="/Register" render={props => <SignUp {...props} createNewUser={this.createNewUser} />} />
           <Route path="/shoppingcart" render={props => <ShoppingCart {...props} />} />
-          <Route path="/create" component={CreateListing} />
+          <Route path="/create" render={props => <CreateListing {...props} createAProduct={this.createAProduct} />} />
           <Route path="/Product" render={props => <SingleProduct {...props} product={this.state.selectedProd} addItemToCart={this.addItemToCart} prodReview={this.state.prodReview} addReview={this.addReview} />} />
           <Route path="/Home" exact render={props => <Home {...props} user={user} allProducts = {this.state.allProducts} 
           goToSingleProd={this.goToSingleProd} searchForProduct={this.searchForProduct} getReviews={this.getReviews} getAllProducts={this.getAllProducts}/>} />
