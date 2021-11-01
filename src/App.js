@@ -148,7 +148,8 @@ componentDidMount () {
  createAProduct = async (product) => {
   let response = await axios.post(`https://localhost:44394/api/product/`, product)
   this.getAllProducts(); 
-  return response.status; 
+  window.location = '/Home'; 
+  return response.status;
 }
 
   render () {
