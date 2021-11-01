@@ -160,7 +160,7 @@ componentDidMount () {
         <NavBar  user={user}  logOutUser={this.logOutUser} /> 
       <div className='App'>
         <Switch>
-          <Route path="/Profile" exact render={props => { 
+          <Route path="/" exact render={props => { 
           if(!user){
             return <Redirect to="/Login" />;
           }

@@ -7,9 +7,8 @@ import JazzBass from "../../Images/JazzBass.png"
 
 function SingleProduct (props) {
 
-    const [value, setValue] = React.useState(props.product.rating);
+    const [value, setValue] = useState(props.product.rating);
     const [reviewBody, setReviewBody] = useState();
-    
 
     const handleChange = (event) => {
         

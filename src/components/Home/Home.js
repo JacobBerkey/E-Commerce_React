@@ -52,43 +52,5 @@ const Home = (props) =>{
 }
 export default Home;
 
-{/* <Table>
-                            
-                            <tbody>
-                                {props.allProducts.map((product) => (
-                                    
-                                <tr>
-                                    
-                                    <td>
-                                        {product.name}<br></br>
-                                        ${product.price}<br></br>
-                                        <Link to="/Product"><Button onClick={()=> {props.goToSingleProd(product);props.getReviews(product.productId)}}>View Product</Button></Link>
-                                    </td>
-                           
-                                </tr>
-                                ))}
-                            </tbody>
-                                </Table> */}
 
-{/* <div className="row1">
-
-                        
-
-<h1 >Music Plus</h1> <br/>
-<h5> "Where artists are born" </h5>
-
-
-
-</div>
-
-<div className="row">
-
-<div className="col">
-
-<SearchBar searchForProduct={props.searchForProduct}/>
-<Grid style={{marginLeft: "850px"}}> <Button variant="contained" onClick={handleClick}>Refresh Product List</Button></Grid>
-
-</div>
-
-</div> */}
 

@@ -24,7 +24,7 @@ import {Form} from 'react-bootstrap';
             <Form onSubmit={handleSubmit}>
                 <Grid className="search-bar"> 
                     <TextField  fullWidth variant="outlined"
-                    className="input"  type="text" name="searchTerm" placeholder="Search by name, category, description..."
+                    className="input"  type="text" name="searchTerm" placeholder="Search by name or category..."
                     onChange={handleChange} value={searchTerm} />
                 </Grid>
             </Form>
